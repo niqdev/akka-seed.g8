@@ -11,14 +11,14 @@ object Settings {
 
   lazy val appSettings = commonSettings ++ Seq(
     name := "app",
-    libraryDependencies ++= libDependencies,
+    libraryDependencies ++= appDependencies,
     mainClass in run := Some("$package$.Main")
   )
 
   lazy val cliSettings = commonSettings ++ Seq(
     name := "cli",
     libraryDependencies ++= cliDependencies,
-    mainClass in run := Some("$package$.Cli")
+    mainClass in run := Some("$package$.cli.Cli")
   )
 
 }

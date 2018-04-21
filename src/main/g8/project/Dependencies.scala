@@ -21,14 +21,19 @@ object Dependencies {
     val circe = "0.9.3"
 
     val scalatest = "3.0.5"
+    val scalamock = "3.6.0"
   }
 
   lazy val commonDependencies = Seq(
     "ch.qos.logback" % "logback-classic" % V.logback,
     "com.typesafe.scala-logging" %% "scala-logging" % V.scalaLogging,
     "com.typesafe" % "config" % V.config,
-    "com.github.scopt" %% "scopt" % V.scopt,
 
+    "org.scalatest" %% "scalatest" % V.scalatest % Test,
+    "org.scalamock" %% "scalamock-scalatest-support" % V.scalamock % Test
+  )
+
+  lazy val appDependencies = commonDependencies ++ Seq(
     N.typesafe %% "akka-actor" % V.akka,
     N.typesafe %% "akka-stream" % V.akka,
     N.typesafe %% "akka-http" % V.akkaHttp,
@@ -37,17 +42,14 @@ object Dependencies {
     N.circe %% "circe-core" % V.circe,
     N.circe %% "circe-generic" % V.circe,
     N.circe %% "circe-parser" % V.circe,
-    N.circe %% "circe-java8" % V.circe
-  )
+    N.circe %% "circe-java8" % V.circe,
 
-  lazy val testDependencies = Seq(
-    "org.scalatest" %% "scalatest" % V.scalatest % Test,
     N.typesafe %% "akka-testkit" % V.akka % Test,
     N.typesafe %% "akka-http-testkit" % V.akkaHttp % Test
   )
 
-  lazy val libDependencies = commonDependencies ++ testDependencies
-
-  lazy val cliDependencies = commonDependencies
+  lazy val cliDependencies = commonDependencies ++ Seq(
+    "com.github.scopt" %% "scopt" % V.scopt
+  )
 
 }

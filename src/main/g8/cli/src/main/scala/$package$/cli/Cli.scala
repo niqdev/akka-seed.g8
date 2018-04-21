@@ -1,4 +1,5 @@
 package $package$
+package cli
 
 import com.typesafe.scalalogging.Logger
 

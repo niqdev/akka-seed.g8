@@ -1,6 +1,7 @@
 package $package$
+package cli
 
-import $package$.Game.Game
+import $package$.cli.Game.Game
 import $package$.config.BaseSettings
 
 object Game extends Enumeration {
@@ -18,7 +19,7 @@ object CommandLineParser {
   private[this] implicit val entityRead: scopt.Read[Game.Value] =
     scopt.Read.reads(Game withName _)
 
-  private[this] val parser = new scopt.OptionParser[Config]("$package$") {
+  private[this] val parser = new scopt.OptionParser[Config]("$organization$") {
     head(applicationSettings.name)
 
     opt[String]('p', "player")
@@ -37,7 +38,7 @@ object CommandLineParser {
 
   }
 
-  protected[this] def parseAge(age: Int): Option[Int] = age match {
+  protected[cli] def parseAge(age: Int): Option[Int] = age match {
     case value if value < 0 => None
     case _ => Some(age)
   }
