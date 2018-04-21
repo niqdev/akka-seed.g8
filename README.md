@@ -7,7 +7,7 @@
 g8 foundweekends/giter8.g8
 
 # test template
-g8 file://akka-seed.g8 --name=my-akka-project --force
+g8 file://akka-seed.g8
 
 g8 file://akka-seed.g8 \
   --name=my-akka-project \
