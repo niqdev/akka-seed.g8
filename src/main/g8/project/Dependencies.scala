@@ -13,6 +13,7 @@ object Dependencies {
     val logback = "1.2.3"
     val scalaLogging = "3.9.0"
     val config = "1.3.3"
+    val scopt = "3.7.0"
 
     val akka = "2.5.12"
     val akkaHttp = "10.1.1"
@@ -26,6 +27,7 @@ object Dependencies {
     "ch.qos.logback" % "logback-classic" % V.logback,
     "com.typesafe.scala-logging" %% "scala-logging" % V.scalaLogging,
     "com.typesafe" % "config" % V.config,
+    "com.github.scopt" %% "scopt" % V.scopt,
 
     N.typesafe %% "akka-actor" % V.akka,
     N.typesafe %% "akka-stream" % V.akka,

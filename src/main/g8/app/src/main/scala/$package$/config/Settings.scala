@@ -4,11 +4,12 @@ package config
 import java.util.concurrent.TimeUnit.SECONDS
 
 import akka.actor.{ActorSystem, ExtendedActorSystem, Extension, ExtensionId, ExtensionIdProvider}
+import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.duration.FiniteDuration
 
 final class SettingsImpl(system: ExtendedActorSystem) extends Extension {
-  private[this] val config = system.settings.config
+  private[this] lazy val config = system.settings.config
   private[this] val applicationConfig = config getConfig "application"
 
   object Http {
@@ -30,4 +31,12 @@ object Settings extends ExtensionId[SettingsImpl] with ExtensionIdProvider {
     * Java API: retrieve the Settings extension for the given system.
     */
   override def get(system: ActorSystem): SettingsImpl = super.get(system)
+}
+
+// alternative without actor system
+object BaseSettings {
+  private[this] lazy val config = ConfigFactory.load()
+  private[this] val applicationConfig = config getConfig "application"
+
+  val name: String = applicationConfig getString "name"
 }
