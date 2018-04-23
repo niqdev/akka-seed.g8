@@ -9,7 +9,7 @@ import $package$.http.Web
 
 import scala.concurrent.ExecutionContext
 
-object Main extends Web with App {
+object Server extends Web with App {
 
   protected[this] implicit val actorSystem: ActorSystem = ActorSystem("$name$")
   protected[this] implicit val materializer: ActorMaterializer = ActorMaterializer()
@@ -21,7 +21,7 @@ object Main extends Web with App {
   private[this] val log = Logging(actorSystem, getClass.getName)
 
   bindAndHandleHttp {
-    log.debug("main")
+    log.debug("run server")
   }
 
 }

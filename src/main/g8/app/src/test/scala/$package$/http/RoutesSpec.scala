@@ -3,7 +3,7 @@ package http
 
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.{Matchers, WordSpec}
-import $package$.Main.routes
+import $package$.Server.routes
 import $package$.http.route.Status
 
 // scalastyle:off underscore.import

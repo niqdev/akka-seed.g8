@@ -54,8 +54,8 @@ object Settings {
   lazy val appSettings = commonSettings ++ Seq(
     name := "app",
     libraryDependencies ++= appDependencies,
-    mainClass in run := Some("$package$.Main"),
-    mainClass in reStart := Some("$package$.Main"),
+    mainClass in run := Some("$package$.Server"),
+    mainClass in reStart := Some("$package$.Server"),
 
     // docker
     packageName := "$name;format="normalize"$",
@@ -69,7 +69,7 @@ object Settings {
   lazy val cliSettings = commonSettings ++ Seq(
     name := "cli",
     libraryDependencies ++= cliDependencies,
-    mainClass in run := Some("$package$.cli.Cli")
+    mainClass in run := Some("$package$.Main")
   )
 
 }

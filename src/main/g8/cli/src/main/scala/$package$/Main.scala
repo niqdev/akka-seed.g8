@@ -1,9 +1,9 @@
 package $package$
-package cli
 
+import $package$.cli.CommandLineParser
 import com.typesafe.scalalogging.Logger
 
-object Cli {
+object Main {
   private[this] val log = Logger(getClass.getName)
 
   def main(args: Array[String]): Unit = {
