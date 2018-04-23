@@ -11,6 +11,6 @@ trait StopSystemAfterAll extends BeforeAndAfterAll {
 
   override protected def afterAll(): Unit = {
     super.afterAll()
-    system.terminate()
+    val _ = system.terminate()
   }
 }

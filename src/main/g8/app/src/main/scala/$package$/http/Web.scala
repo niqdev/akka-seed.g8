@@ -32,7 +32,7 @@ trait Web extends Routes {
         shutdown(failed = true)
     }
 
-    def startApp: Unit = {
+    def startApp(): Unit = {
       Try(onStart) match {
         case Success(_) =>
           log.info("successfully started")
@@ -43,7 +43,7 @@ trait Web extends Routes {
     }
 
     def shutdownHttp(serverBinding: ServerBinding): Unit = {
-      sys.addShutdownHook {
+      val _ = sys.addShutdownHook {
         serverBinding.unbind().onComplete {
           case Success(_) =>
             shutdown()

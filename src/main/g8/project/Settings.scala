@@ -11,6 +11,27 @@ object Settings {
   lazy val commonSettings = Seq(
     scalaVersion := V.scala,
 
+    scalacOptions ++= Seq(
+      "-encoding", "UTF-8",
+      "-unchecked",
+      "-deprecation",
+      "-feature",
+      "-language:existentials",
+      "-language:higherKinds",
+      "-language:implicitConversions",
+      "-language:postfixOps",
+      "-Xfuture",
+      "-Yno-adapted-args",
+      "-Ywarn-dead-code",
+      "-Ywarn-infer-any",
+      "-Ywarn-unused-import",
+      "-Xfatal-warnings",
+      "-Ywarn-numeric-widen",
+      "-Ywarn-value-discard",
+      "-Ywarn-unused",
+      "-Xlint"
+    ),
+
     organization := "$organization$",
     headerLicense := Some(HeaderLicense.MIT("$year$", "$author$"))
   )
