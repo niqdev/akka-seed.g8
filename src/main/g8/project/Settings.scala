@@ -6,6 +6,7 @@ import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, heade
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
 import sbt.Keys._
 import sbt._
+import spray.revolver.RevolverPlugin.autoImport.reStart
 
 object Settings {
 
@@ -38,13 +39,17 @@ object Settings {
 
     // header
     organization := "$organization$",
-    headerLicense := Some(HeaderLicense.MIT("$year$", "$author$"))
+    headerLicense := Some(HeaderLicense.MIT("$year$", "$author$")),
+
+    // hot reload
+    mainClass in reStart := None
   )
 
   lazy val appSettings = commonSettings ++ Seq(
     name := "app",
     libraryDependencies ++= appDependencies,
     mainClass in run := Some("$package$.Main"),
+    mainClass in reStart := Some("$package$.Main"),
 
     // docker
     packageName := "$name;format="normalize"$",
