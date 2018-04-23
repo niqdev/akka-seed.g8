@@ -2,10 +2,12 @@ import Dependencies._
 import com.typesafe.config.ConfigFactory
 import com.typesafe.sbt.SbtNativePackager.autoImport.packageName
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.dockerExposedPorts
+import com.typesafe.sbt.site.SitePlugin.autoImport.{addMappingsToSiteDir, siteSubdirName}
 import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, headerLicense}
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
 import sbt.Keys._
 import sbt._
+import sbtunidoc.ScalaUnidocPlugin.autoImport.ScalaUnidoc
 import scoverage.ScoverageKeys.{coverageFailOnMinimum, coverageHighlighting, coverageMinimum}
 import spray.revolver.RevolverPlugin.autoImport.reStart
 
@@ -70,6 +72,12 @@ object Settings {
     name := "cli",
     libraryDependencies ++= cliDependencies,
     mainClass in run := Some("$package$.Main")
+  )
+
+  lazy val rootSettings = Seq(
+    // scaladoc
+    siteSubdirName in ScalaUnidoc := "api",
+    addMappingsToSiteDir(mappings in(ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)
   )
 
 }

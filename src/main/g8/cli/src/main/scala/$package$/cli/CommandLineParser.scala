@@ -4,15 +4,35 @@ package cli
 import $package$.cli.Game.Game
 import $package$.config.BaseSettings
 
+/**
+  * Type of game
+  */
 object Game extends Enumeration {
   type Game = Value
   val Rock, Paper, Scissors, Invalid = Value
 }
 
+/**
+  * Command line parameters
+  *
+  * @param player player
+  * @param game   game [[Game]]
+  * @param age    age
+  */
 final case class Config(player: String = "", game: Game = Game.Invalid, age: Int = -1)
 
+/**
+  * Application parameters
+  *
+  * @param player player
+  * @param game   game [[Game]]
+  * @param age    age
+  */
 final case class Params(player: String, game: Game, age: Option[Int])
 
+/**
+  * Command line parser
+  */
 object CommandLineParser {
   private[this] lazy val applicationSettings = BaseSettings
 
@@ -43,6 +63,12 @@ object CommandLineParser {
     case _                  => Some(age)
   }
 
+  /**
+    * Parse parameters
+    *
+    * @param args input parameters
+    * @return validated parameters
+    */
   def parse(args: Seq[String]): Either[String, Params] =
     parser.parse(args, Config()) match {
       case Some(config) =>

@@ -9,6 +9,7 @@ lazy val cli = project.in(file("cli"))
   .dependsOn(app)
 
 lazy val `$name;format="normalize"$` = project.in(file("."))
+  // TODO issue AutomateHeaderPlugin https://github.com/sbt/sbt-header/issues/153
+  .enablePlugins(SiteScaladocPlugin, ScalaUnidocPlugin)
+  .settings(rootSettings)
   .aggregate(app, cli)
-  // TODO https://github.com/sbt/sbt-header/issues/153
-  //.enablePlugins(AutomateHeaderPlugin)

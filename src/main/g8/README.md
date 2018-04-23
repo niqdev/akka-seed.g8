@@ -37,6 +37,13 @@ sbt "whatDependsOn ch.qos.logback logback-classic 1.2.3"
 
 # show outdated dependencies
 sbt dependencyUpdates
+
+# generate, package and aggregate scaladoc
+sbt makeSite packageSite
+
+# view scaladoc in browser (mac|linux)
+open ./target/scala-2.12/unidoc/index.html
+xdg-open ./target/scala-2.12/unidoc/index.html
 ```
 
 ## Docker
