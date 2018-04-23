@@ -1,10 +1,15 @@
 # $name;format="normalize"$
 
 ```
+# run
 sbt app/run
 sbt "cli/run -p MyName --game Rock -a 2"
 
+# run tests
 sbt test
+
+# check style
+sbt scalastyle
 ```
 
 ## Docker
