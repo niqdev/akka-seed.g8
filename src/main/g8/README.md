@@ -34,6 +34,9 @@ sbt dependencyTree
 
 # verify dependencies
 sbt "whatDependsOn ch.qos.logback logback-classic 1.2.3"
+
+# show outdated dependencies
+sbt dependencyUpdates
 ```
 
 ## Docker
