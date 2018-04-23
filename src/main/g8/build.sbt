@@ -10,3 +10,5 @@ lazy val cli = project.in(file("cli"))
 
 lazy val `$name;format="normalize"$` = project.in(file("."))
   .aggregate(app, cli)
+  // TODO https://github.com/sbt/sbt-header/issues/153
+  //.enablePlugins(AutomateHeaderPlugin)

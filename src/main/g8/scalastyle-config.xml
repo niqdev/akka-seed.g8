@@ -6,7 +6,7 @@
             <parameter name="maxFileLength"><![CDATA[800]]></parameter>
         </parameters>
     </check>
-    <check level="warning" class="org.scalastyle.file.HeaderMatchesChecker" enabled="false">
+    <check level="warning" class="org.scalastyle.file.HeaderMatchesChecker" enabled="true">
         <parameters>
             <parameter name="header"><![CDATA[TODO]]></parameter>
         </parameters>

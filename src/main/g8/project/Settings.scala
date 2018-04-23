@@ -2,6 +2,7 @@ import Dependencies._
 import com.typesafe.config.ConfigFactory
 import com.typesafe.sbt.SbtNativePackager.autoImport.packageName
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.dockerExposedPorts
+import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, headerLicense}
 import sbt.Keys._
 import sbt._
 
@@ -10,7 +11,8 @@ object Settings {
   lazy val commonSettings = Seq(
     scalaVersion := V.scala,
 
-    organization := "$organization$"
+    organization := "$organization$",
+    headerLicense := Some(HeaderLicense.MIT("$year$", "$author$"))
   )
 
   lazy val appSettings = commonSettings ++ Seq(
