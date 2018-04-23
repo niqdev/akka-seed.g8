@@ -40,7 +40,7 @@ object CommandLineParser {
 
   protected[cli] def parseAge(age: Int): Option[Int] = age match {
     case value if value < 0 => None
-    case _ => Some(age)
+    case _                  => Some(age)
   }
 
   def parse(args: Seq[String]): Either[String, Params] =

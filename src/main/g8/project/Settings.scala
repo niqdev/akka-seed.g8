@@ -3,6 +3,7 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.sbt.SbtNativePackager.autoImport.packageName
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.dockerExposedPorts
 import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, headerLicense}
+import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
 import sbt.Keys._
 import sbt._
 
@@ -32,6 +33,10 @@ object Settings {
       "-Xlint"
     ),
 
+    // format code
+    scalafmtOnCompile in Compile := true,
+
+    // header
     organization := "$organization$",
     headerLicense := Some(HeaderLicense.MIT("$year$", "$author$"))
   )

@@ -59,7 +59,7 @@ trait Web extends Routes {
       materializer.shutdown()
       actorSystem.terminate().onComplete {
         case Success(_) if !failed => sys.exit()
-        case _ => sys.exit(-1)
+        case _                     => sys.exit(-1)
       }
     }
   }
