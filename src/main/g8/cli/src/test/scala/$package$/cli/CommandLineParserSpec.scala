@@ -44,4 +44,3 @@ final class CommandLineParserSpec extends WordSpecLike with Matchers {
   }
 
 }
-

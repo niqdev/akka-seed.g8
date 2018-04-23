@@ -6,6 +6,7 @@ import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, heade
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
 import sbt.Keys._
 import sbt._
+import scoverage.ScoverageKeys.{coverageFailOnMinimum, coverageHighlighting, coverageMinimum}
 import spray.revolver.RevolverPlugin.autoImport.reStart
 
 object Settings {
@@ -42,7 +43,12 @@ object Settings {
     headerLicense := Some(HeaderLicense.MIT("$year$", "$author$")),
 
     // hot reload
-    mainClass in reStart := None
+    mainClass in reStart := None,
+
+    // coverage
+    coverageMinimum := 70,
+    coverageFailOnMinimum := false,
+    coverageHighlighting := true
   )
 
   lazy val appSettings = commonSettings ++ Seq(

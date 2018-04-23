@@ -11,6 +11,13 @@ sbt ~reStart
 # run tests
 sbt test
 
+# run tests, verify coverage, generate report and aggregate results
+sbt clean coverage test coverageReport coverageAggregate
+
+# view coverage report in browser (mac|linux)
+open ./target/scala-2.12/scoverage-report/index.html
+xdg-open ./target/scala-2.12/scoverage-report/index.html
+
 # format code
 sbt scalafmt
 

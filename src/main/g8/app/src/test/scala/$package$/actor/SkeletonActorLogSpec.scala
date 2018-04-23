@@ -9,8 +9,7 @@ import $package$.actor.SkeletonActor.RequestMessage
 
 object SkeletonActorLogSpec {
   val testSystem: ActorSystem = {
-    val config = ConfigFactory.parseString(
-      """
+    val config = ConfigFactory.parseString("""
       akka.loglevel = "DEBUG"
       akka.loggers = ["akka.testkit.TestEventListener"]
       """)
@@ -18,15 +17,17 @@ object SkeletonActorLogSpec {
   }
 }
 
-final class SkeletonActorLogSpec extends TestKit(SkeletonActorLogSpec.testSystem)
-  with WordSpecLike
-  with StopSystemAfterAll {
+final class SkeletonActorLogSpec
+    extends TestKit(SkeletonActorLogSpec.testSystem)
+    with WordSpecLike
+    with StopSystemAfterAll {
 
   "skeleton actor" must {
     "log debug when receives a Request message" in {
       val skeletonActorRef = system.actorOf(SkeletonActor.props, "skeleton-test-1")
 
-      EventFilter.debug(message = "message: myMessage", occurrences = 1)
+      EventFilter
+        .debug(message = "message: myMessage", occurrences = 1)
         .intercept {
           skeletonActorRef ! RequestMessage("myMessage")
         }
@@ -34,7 +35,8 @@ final class SkeletonActorLogSpec extends TestKit(SkeletonActorLogSpec.testSystem
     "log error when receives an invalid message" in {
       val skeletonActorRef = system.actorOf(SkeletonActor.props, "skeleton-test-2")
 
-      EventFilter.error(message = "invalid message", occurrences = 1)
+      EventFilter
+        .error(message = "invalid message", occurrences = 1)
         .intercept {
           skeletonActorRef ! "unhandled message"
         }
