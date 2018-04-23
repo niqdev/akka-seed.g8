@@ -22,14 +22,18 @@ docker run \
   -e HTTP_PORT="8080" \
   -p 80:8080 \
   --name $name;format="normalize"$ \
-  $name;format="normalize"$:0.1.0-SNAPSHOT
+  $name;format="normalize"$:latest
 
-# request status (with HTTPie)
+# start container in background
+docker-compose up -d
+# logs
+tail -F /vol/log/$name;format="normalize"$/$name;format="normalize"$.log
+
+# healthcheck
 http :80/status
+curl localhost:80/status
 
 # access container
 docker exec -it $name;format="normalize"$ bash
-
-# access container as root
 docker exec -it --user root $name;format="normalize"$ bash
 ```
