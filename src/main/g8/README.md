@@ -28,6 +28,12 @@ sbt headerCreate
 
 # check style
 sbt scalastyle
+
+# show project dependencies
+sbt dependencyTree
+
+# verify dependencies
+sbt "whatDependsOn ch.qos.logback logback-classic 1.2.3"
 ```
 
 ## Docker
