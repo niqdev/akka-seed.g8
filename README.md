@@ -1,5 +1,9 @@
 # akka-seed.g8
 
+```
+sbt new niqdev/akka-seed.g8
+```
+
 ## Development
 
 ```

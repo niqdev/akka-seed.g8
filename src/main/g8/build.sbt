@@ -2,6 +2,7 @@ import Settings._
 
 lazy val app = project.in(file("app"))
   .settings(appSettings)
+  .enablePlugins(JavaServerAppPackaging)
 
 lazy val cli = project.in(file("cli"))
   .settings(cliSettings)

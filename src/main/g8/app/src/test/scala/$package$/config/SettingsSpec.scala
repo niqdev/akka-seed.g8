@@ -12,16 +12,16 @@ class SettingsSpec extends TestKit(ActorSystem("settings-test")) with WordSpecLi
   object ConfigTest {
     private[this] val applicationConfig = system.settings.config getConfig "application"
     private[this] val logConfig = applicationConfig getConfig "log"
-    //private[this] val dockerConfig = applicationConfig getConfig "docker"
+    private[this] val dockerConfig = applicationConfig getConfig "docker"
 
     val applicationName: String = applicationConfig getString "name"
     val logName: String = logConfig getString "name"
-    //val dockerPort: Int = dockerConfig getInt "port"
+    val dockerPort: Int = dockerConfig getInt "port"
   }
 
   "application name" should {
-    "be equal to $name$" in {
-      ConfigTest.applicationName shouldEqual "$name$"
+    "be equal to $name;format="normalize"$" in {
+      ConfigTest.applicationName shouldEqual $name;format="normalize"$
     }
   }
 
@@ -31,10 +31,10 @@ class SettingsSpec extends TestKit(ActorSystem("settings-test")) with WordSpecLi
     }
   }
 
-//  "exposed docker port" should {
-//    "be equal to application http port" in {
-//      ConfigTest.dockerPort shouldEqual settings.Http.port
-//    }
-//  }
+  "exposed docker port" should {
+    "be equal to application http port" in {
+      ConfigTest.dockerPort shouldEqual settings.Http.port
+    }
+  }
 
 }
