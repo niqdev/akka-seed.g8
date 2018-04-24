@@ -52,4 +52,9 @@ object Dependencies {
     "com.github.scopt" %% "scopt" % V.scopt
   )
 
+  lazy val perfDependencies = commonDependencies ++ Seq(
+    "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.3.1" % "test,it",
+    "io.gatling" % "gatling-test-framework" % "2.3.1" % "test,it"
+  )
+
 }

@@ -19,7 +19,9 @@ object Settings {
     scalaVersion := V.scala,
 
     scalacOptions ++= Seq(
-      "-encoding", "UTF-8",
+      "-encoding",
+      "UTF-8",
+      "-target:jvm-1.8",
       "-unchecked",
       "-deprecation",
       "-feature",
@@ -58,7 +60,7 @@ object Settings {
     test in assembly := {}
   )
 
-  lazy val commonSettings = Seq(
+  lazy val commonSettings = baseSettings ++ Seq(
     name := "common",
     libraryDependencies ++= commonDependencies
   )
@@ -89,6 +91,11 @@ object Settings {
 
     mainClass in assembly := Some("$package$.Main"),
     assemblyJarName in assembly := s"cli-${version.value}.jar"
+  )
+
+  lazy val perfSettings = baseSettings ++ Seq(
+    name := "perf",
+    libraryDependencies ++= perfDependencies
   )
 
   lazy val rootSettings = Seq(

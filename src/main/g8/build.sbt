@@ -12,8 +12,13 @@ lazy val cli = project.in(file("cli"))
   .settings(cliSettings)
   .dependsOn(common)
 
+lazy val perf = project.in(file("perf"))
+  .enablePlugins(GatlingPlugin)
+  .settings(perfSettings)
+  .dependsOn(common)
+
 lazy val `$name;format="normalize"$` = project.in(file("."))
   // TODO issue AutomateHeaderPlugin https://github.com/sbt/sbt-header/issues/153
   .enablePlugins(SiteScaladocPlugin, ScalaUnidocPlugin)
   .settings(rootSettings)
-  .aggregate(common, app, cli)
+  .aggregate(common, app, cli, perf)

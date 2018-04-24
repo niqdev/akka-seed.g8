@@ -5,7 +5,7 @@ import akka.actor.ActorSystem
 import akka.testkit.TestKit
 import org.scalatest.{Matchers, WordSpecLike}
 
-class AppSettingsSpec extends TestKit(ActorSystem("settings-test")) with WordSpecLike with Matchers {
+final class AppSettingsSpec extends TestKit(ActorSystem("settings-test")) with WordSpecLike with Matchers {
 
   val appSettings = AppSettings(system)
 

@@ -11,7 +11,7 @@ import io.circe.generic.auto._
 import io.circe.syntax._
 // scalastyle:on underscore.import
 
-class RoutesSpec extends WordSpec with Matchers with ScalatestRouteTest {
+final class RoutesSpec extends WordSpec with Matchers with ScalatestRouteTest {
 
   "routes /status" should {
     "return OK for GET requests to the root path" in {
