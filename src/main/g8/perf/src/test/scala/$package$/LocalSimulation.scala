@@ -14,7 +14,7 @@ final class LocalSimulation extends Simulation {
         .get("/status")
         .check(
           status.is(200),
-          jsonPath("$..value").is("OK")
+          jsonPath("\$..value").is("OK")
         ))
     .pause(1)
 

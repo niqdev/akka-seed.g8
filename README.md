@@ -1,5 +1,10 @@
 # akka-seed.g8
 
+[![Build Status][travis-image]][travis-url]
+
+[travis-image]: https://travis-ci.org/niqdev/akka-seed.g8.svg?branch=master
+[travis-url]: https://travis-ci.org/niqdev/akka-seed.g8
+
 ```
 sbt new niqdev/akka-seed.g8
 ```

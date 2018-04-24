@@ -73,7 +73,7 @@ object Settings {
     mainClass in reStart := Some("$package$.Server"),
 
     mainClass in assembly := Some("$package$.Server"),
-    assemblyJarName in assembly := s"app-${version.value}.jar",
+    assemblyJarName in assembly := s"app-\${version.value}.jar",
 
     // docker
     packageName := "$name;format="normalize"$",
@@ -90,7 +90,7 @@ object Settings {
     mainClass in run := Some("$package$.Main"),
 
     mainClass in assembly := Some("$package$.Main"),
-    assemblyJarName in assembly := s"cli-${version.value}.jar"
+    assemblyJarName in assembly := s"cli-\${version.value}.jar"
   )
 
   lazy val perfSettings = baseSettings ++ Seq(

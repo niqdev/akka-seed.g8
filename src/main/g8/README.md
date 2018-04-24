@@ -72,8 +72,8 @@ sbt "gatling:testOnly *LocalSimulation"
 sbt "gatling-it:testOnly *StressSimulation"
 
 # view latest simulation report in browser [mac|linux]
-[open|xdg-open] ./perf/target/gatling/$(ls -t perf/target/gatling/ | head -1)/index.html
-[open|xdg-open] ./perf/target/gatling-it/$(ls -t perf/target/gatling-it/ | head -1)/index.html
+[open|xdg-open] ./perf/target/gatling/\$(ls -t perf/target/gatling/ | head -1)/index.html
+[open|xdg-open] ./perf/target/gatling-it/\$(ls -t perf/target/gatling-it/ | head -1)/index.html
 ```
 
 ## Packaging
