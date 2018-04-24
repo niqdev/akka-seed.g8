@@ -1,5 +1,7 @@
 # $name;format="normalize"$
 
+## Development
+
 ```
 # run
 sbt app/run
@@ -13,7 +15,6 @@ sbt test
 
 # run tests, verify coverage, generate report and aggregate results
 sbt clean coverage test coverageReport coverageAggregate
-
 # view coverage report in browser (mac|linux)
 open ./target/scala-2.12/scoverage-report/index.html
 xdg-open ./target/scala-2.12/scoverage-report/index.html
@@ -31,7 +32,6 @@ sbt scalastyle
 
 # show project dependencies
 sbt dependencyTree
-
 # verify dependencies
 sbt "whatDependsOn ch.qos.logback logback-classic 1.2.3"
 
@@ -40,14 +40,14 @@ sbt dependencyUpdates
 
 # generate, package and aggregate scaladoc
 sbt makeSite packageSite
-
 # view scaladoc in browser (mac|linux)
 open ./target/scala-2.12/unidoc/index.html
 xdg-open ./target/scala-2.12/unidoc/index.html
 ```
 
-## Docker
+## Packaging
 
+Docker
 ```
 # generate Dockerfile in target/docker/
 sbt docker:stage
@@ -65,7 +65,7 @@ docker run \
 
 # start container in background
 docker-compose up -d
-# logs
+# container logs
 tail -F /vol/log/$name;format="normalize"$/$name;format="normalize"$.log
 
 # healthcheck
@@ -75,4 +75,21 @@ curl localhost:80/status
 # access container
 docker exec -it $name;format="normalize"$ bash
 docker exec -it --user root $name;format="normalize"$ bash
+```
+
+Uber Jar
+```
+# package uber jar
+sbt assembly
+
+# run cli example
+java -jar cli/target/scala-2.12/cli-latest.jar \
+  -p MyName \
+  --game Rock \
+  -a 2
+
+# run app example
+HTTP_PORT=8080 \
+LOG_LEVEL=INFO \
+  java -jar app/target/scala-2.12/app-latest.jar
 ```

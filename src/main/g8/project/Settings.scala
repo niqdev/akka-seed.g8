@@ -7,6 +7,8 @@ import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, heade
 import org.scalafmt.sbt.ScalafmtPlugin.autoImport.scalafmtOnCompile
 import sbt.Keys._
 import sbt._
+import sbtassembly.AssemblyKeys.assembly
+import sbtassembly.AssemblyPlugin.autoImport.assemblyJarName
 import sbtunidoc.ScalaUnidocPlugin.autoImport.ScalaUnidoc
 import scoverage.ScoverageKeys.{coverageFailOnMinimum, coverageHighlighting, coverageMinimum}
 import spray.revolver.RevolverPlugin.autoImport.reStart
@@ -50,14 +52,21 @@ object Settings {
     // coverage
     coverageMinimum := 70,
     coverageFailOnMinimum := false,
-    coverageHighlighting := true
+    coverageHighlighting := true,
+
+    // uber jar
+    test in assembly := {}
   )
 
   lazy val appSettings = commonSettings ++ Seq(
     name := "app",
     libraryDependencies ++= appDependencies,
     mainClass in run := Some("$package$.Server"),
+
     mainClass in reStart := Some("$package$.Server"),
+
+    mainClass in assembly := Some("$package$.Server"),
+    assemblyJarName in assembly := s"app-${version.value}.jar",
 
     // docker
     packageName := "$name;format="normalize"$",
@@ -71,7 +80,10 @@ object Settings {
   lazy val cliSettings = commonSettings ++ Seq(
     name := "cli",
     libraryDependencies ++= cliDependencies,
-    mainClass in run := Some("$package$.Main")
+    mainClass in run := Some("$package$.Main"),
+
+    mainClass in assembly := Some("$package$.Main"),
+    assemblyJarName in assembly := s"cli-${version.value}.jar"
   )
 
   lazy val rootSettings = Seq(
