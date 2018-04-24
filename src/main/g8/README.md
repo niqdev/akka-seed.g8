@@ -2,7 +2,7 @@
 
 ## Development
 
-```
+```bash
 # run
 sbt app/run
 sbt "cli/run -p MyName --game Rock -a 2"
@@ -41,7 +41,7 @@ sbt makeSite packageSite
 ## Testing
 
 Unit
-```
+```bash
 # run tests
 sbt test
 
@@ -62,7 +62,7 @@ sbt clean coverage test coverageReport coverageAggregate
 ```
 
 Performance
-```
+```bash
 # run simulations
 sbt gatling:test
 sbt gatling-it:test
@@ -79,7 +79,7 @@ sbt "gatling-it:testOnly *StressSimulation"
 ## Packaging
 
 Docker
-```
+```bash
 # generate Dockerfile in target/docker/
 sbt docker:stage
 
@@ -113,7 +113,7 @@ unzip app/target/scala-2.12/app_2.12-* -d app/target/scala-2.12/app
 ```
 
 Uber Jar
-```
+```bash
 # package uber jar
 sbt assembly
 

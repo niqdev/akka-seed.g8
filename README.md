@@ -5,13 +5,13 @@
 [travis-image]: https://travis-ci.org/niqdev/akka-seed.g8.svg?branch=master
 [travis-url]: https://travis-ci.org/niqdev/akka-seed.g8
 
-```
+```bash
 sbt new niqdev/akka-seed.g8
 ```
 
 ## Development
 
-```
+```bash
 # create template
 g8 foundweekends/giter8.g8
 
