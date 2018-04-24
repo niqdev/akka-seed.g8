@@ -15,7 +15,7 @@ import spray.revolver.RevolverPlugin.autoImport.reStart
 
 object Settings {
 
-  lazy val commonSettings = Seq(
+  lazy val baseSettings = Seq(
     scalaVersion := V.scala,
 
     scalacOptions ++= Seq(
@@ -58,7 +58,12 @@ object Settings {
     test in assembly := {}
   )
 
-  lazy val appSettings = commonSettings ++ Seq(
+  lazy val commonSettings = Seq(
+    name := "common",
+    libraryDependencies ++= commonDependencies
+  )
+
+  lazy val appSettings = baseSettings ++ Seq(
     name := "app",
     libraryDependencies ++= appDependencies,
     mainClass in run := Some("$package$.Server"),
@@ -73,11 +78,11 @@ object Settings {
     dockerExposedPorts := {
       val resourceFile = (resourceDirectory in Compile).value / "application"
       val config = ConfigFactory.parseFileAnySyntax(resourceFile).resolve()
-      Seq(config.getInt("application.docker.port"))
+      Seq(config.getInt("app.docker.port"))
     }
   )
 
-  lazy val cliSettings = commonSettings ++ Seq(
+  lazy val cliSettings = baseSettings ++ Seq(
     name := "cli",
     libraryDependencies ++= cliDependencies,
     mainClass in run := Some("$package$.Main"),

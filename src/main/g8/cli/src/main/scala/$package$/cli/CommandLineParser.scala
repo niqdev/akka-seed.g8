@@ -2,7 +2,7 @@ package $package$
 package cli
 
 import $package$.cli.Game.Game
-import $package$.config.BaseSettings
+import $package$.config.CommonSettings
 
 /**
   * Type of game
@@ -34,13 +34,13 @@ final case class Params(player: String, game: Game, age: Option[Int])
   * Command line parser
   */
 object CommandLineParser {
-  private[this] lazy val applicationSettings = BaseSettings
+  private[this] lazy val commonSettings = CommonSettings
 
   private[this] implicit val entityRead: scopt.Read[Game.Value] =
     scopt.Read.reads(Game withName _)
 
   private[this] val parser = new scopt.OptionParser[Config]("$organization$") {
-    head(applicationSettings.name)
+    head(commonSettings.name)
 
     opt[String]('p', "player")
       .required()
@@ -55,7 +55,6 @@ object CommandLineParser {
     opt[Int]('a', "age")
       .action((x, c) => c.copy(age = x))
       .text("optional age")
-
   }
 
   protected[cli] def parseAge(age: Int): Option[Int] = age match {

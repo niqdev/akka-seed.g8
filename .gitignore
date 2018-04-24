@@ -5,3 +5,5 @@
 *.iml
 
 target/
+out/
+log/

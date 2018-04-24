@@ -10,10 +10,10 @@
     </appender>
 
     <define name="LOG_PATH" class="$package$.config.TypesafeConfigPropertyDefiner">
-        <propertyName>application.log.path</propertyName>
+        <propertyName>common.log.path</propertyName>
     </define>
     <define name="LOG_NAME" class="$package$.config.TypesafeConfigPropertyDefiner">
-        <propertyName>application.log.name</propertyName>
+        <propertyName>common.log.name</propertyName>
     </define>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>\${LOG_PATH}/\${LOG_NAME}.log</file>
@@ -31,7 +31,7 @@
     </appender>
 
     <define name="LOG_LEVEL" class="$package$.config.TypesafeConfigPropertyDefiner">
-        <propertyName>application.log.level</propertyName>
+        <propertyName>common.log.level</propertyName>
     </define>
     <root level="\${LOG_LEVEL}">
         <appender-ref ref="STDOUT"/>

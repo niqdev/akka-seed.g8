@@ -75,6 +75,10 @@ curl localhost:80/status
 # access container
 docker exec -it $name;format="normalize"$ bash
 docker exec -it --user root $name;format="normalize"$ bash
+
+# verify packaging
+sbt package
+unzip app/target/scala-2.12/app_2.12-* -d app/target/scala-2.12/app
 ```
 
 Uber Jar

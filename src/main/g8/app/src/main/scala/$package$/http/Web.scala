@@ -6,7 +6,7 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
-import $package$.config.Settings
+import $package$.config.AppSettings
 
 import scala.util.{Failure, Success, Try}
 
@@ -19,13 +19,13 @@ trait Web extends Routes {
 
     implicit val _ = actorSystem.dispatcher
     val log = Logging(actorSystem, getClass.getName)
-    val httpConfig = Settings(actorSystem).Http
+    val httpConfig = AppSettings(actorSystem).Http
 
     Http().bindAndHandle(routes, httpConfig.host, httpConfig.port).onComplete {
       case Success(serverBinding @ ServerBinding(localAddress)) =>
         val (host, port) = (localAddress.getHostName, localAddress.getPort)
         log.info(s"successfully bound to [\$host:\$port]")
-        startApp
+        startApp()
         shutdownHttp(serverBinding)
       case Failure(error) =>
         log.error(error, s"failed to bind to [\${httpConfig.host}:\${httpConfig.port}]: \$error")
