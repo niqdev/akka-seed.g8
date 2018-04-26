@@ -38,10 +38,10 @@ jobs:
           path: target/scala-2.12/unidoc
           destination: unidoc
 
-  package-jar:
+  publish-jar:
     working_directory: ~/project
     docker:
-      - image: hseeberger/scala-sbt:8u151-2.12.5-1.1.2
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - run:
@@ -49,26 +49,32 @@ jobs:
           command: sbt assembly
       - store_artifacts:
           path: app/target/scala-2.12/app-latest.jar
-          destination: dist
+          # ISSUE https://discuss.circleci.com/t/using-environment-variables-in-config-yml-not-working/14237/20
+          #destination: dist/$CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1.jar
+          destination: dist/app-latest.jar
 
-  package-docker:
+  publish-docker:
     working_directory: ~/project
     docker:
-      - image: hseeberger/scala-sbt:8u151-2.12.5-1.1.2
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
+      - setup_remote_docker
       - run:
-          name: docker
+          name: build docker
           command: sbt docker:publishLocal
+      - run:
+          name: publish
+          command: ./script/docker-registry.sh
 
 workflows:
   version: 2
-  build-and-package:
+  build-and-publish:
     jobs:
       - build
-      - package-jar:
+      - publish-jar:
           requires:
             - build
-      - package-docker:
+      - publish-docker:
           requires:
             - build
