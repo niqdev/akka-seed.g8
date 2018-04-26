@@ -50,7 +50,6 @@ jobs:
       - store_artifacts:
           path: app/target/scala-2.12/app-latest.jar
           # ISSUE https://discuss.circleci.com/t/using-environment-variables-in-config-yml-not-working/14237/20
-          #destination: dist/$CIRCLE_PROJECT_REPONAME-$CIRCLE_SHA1.jar
           destination: dist/app-latest.jar
 
   publish-docker:

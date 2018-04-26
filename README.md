@@ -6,6 +6,7 @@
 [travis-url]: https://travis-ci.org/niqdev/akka-seed.g8
 
 ```bash
+# create project
 sbt new niqdev/akka-seed.g8
 ```
 
