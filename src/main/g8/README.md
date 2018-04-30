@@ -136,3 +136,21 @@ curl localhost:3000/status
 http :3000/metrics
 curl localhost:3000/metrics
 ```
+
+## Monitor
+
+```
+# gui
+jvisualvm
+
+# find vmid
+jcmd | grep sbt
+# find pid
+ps auxww | grep sbt
+
+# cli
+jstat -gcutil VMID 2s 5
+jstat -gccause VMID 2s 5
+jstat -printcompilation VMID 2s 5
+jstat -compiler VMID 2s 5
+```
