@@ -139,7 +139,7 @@ curl localhost:3000/metrics
 
 ## Monitor
 
-```
+```bash
 # gui
 jvisualvm
 
