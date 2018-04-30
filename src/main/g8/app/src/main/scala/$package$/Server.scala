@@ -4,6 +4,7 @@ import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
+import io.prometheus.client.hotspot.DefaultExports
 import $package$.config.AppSettings
 import $package$.http.Web
 
@@ -19,6 +20,9 @@ object Server extends Web with App {
   protected[this] implicit val timeout: Timeout = httpConfig.timeout
 
   private[this] val log = Logging(actorSystem, getClass.getName)
+
+  // JVM metrics from MBeans
+  DefaultExports.initialize()
 
   bindAndHandleHttp {
     log.debug("run server")

@@ -13,7 +13,8 @@ import io.circe.syntax._
 
 final case class Status(value: String)
 
-trait StatusRoute { this: Routes =>
+trait StatusRoute {
+  this: Routes =>
 
   /**
     * Status route.

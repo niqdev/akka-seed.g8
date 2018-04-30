@@ -5,6 +5,7 @@ object Dependencies {
   lazy val N = new {
     val typesafe = "com.typesafe.akka"
     val circe = "io.circe"
+    val prometheus = "io.prometheus"
   }
 
   lazy val V = new {
@@ -19,6 +20,8 @@ object Dependencies {
     val akkaHttp = "10.1.1"
 
     val circe = "0.9.3"
+
+    val prometheus = "0.3.0"
 
     val scalatest = "3.0.5"
     val scalamock = "3.6.0"
@@ -43,6 +46,10 @@ object Dependencies {
     N.circe %% "circe-generic" % V.circe,
     N.circe %% "circe-parser" % V.circe,
     N.circe %% "circe-java8" % V.circe,
+
+    N.prometheus % "simpleclient" % V.prometheus,
+    N.prometheus % "simpleclient_common" % V.prometheus,
+    N.prometheus % "simpleclient_hotspot" % V.prometheus,
 
     N.typesafe %% "akka-testkit" % V.akka % Test,
     N.typesafe %% "akka-http-testkit" % V.akkaHttp % Test

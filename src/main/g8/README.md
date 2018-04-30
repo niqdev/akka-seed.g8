@@ -99,10 +99,6 @@ docker-compose up -d
 # view container logs
 tail -F /vol/log/$name;format="normalize"$/$name;format="normalize"$.log
 
-# healthcheck
-http :80/status
-curl localhost:80/status
-
 # access container
 docker exec -it $name;format="normalize"$ bash
 docker exec -it --user root $name;format="normalize"$ bash
@@ -127,4 +123,16 @@ java -jar cli/target/scala-2.12/cli-latest.jar \
 HTTP_PORT=8080 \
 LOG_LEVEL=INFO \
   java -jar app/target/scala-2.12/app-latest.jar
+```
+
+## APIs
+
+```bash
+# status
+http :3000/status
+curl localhost:3000/status
+
+# metrics
+http :3000/metrics
+curl localhost:3000/metrics
 ```
