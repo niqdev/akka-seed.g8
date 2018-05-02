@@ -180,8 +180,8 @@ Useful command
 ```
 # verify load balancer
 NODE_PORT=\$(kubectl get services/$name;format="normalize"$ -o go-template='{{(index .spec.ports 0).nodePort}}')
-http \$(minikube ip):$NODE_PORT/status
-http \$(minikube ip):$NODE_PORT/env | jq ".MY_POD_IP"
+http \$(minikube ip):\$NODE_PORT/status
+http \$(minikube ip):\$NODE_PORT/env | jq ".MY_POD_IP"
 
 # logs
 kubectl logs -f $name;format="normalize"$

@@ -20,8 +20,8 @@ Features
 * [Gatling](https://gatling.io)
 * [Docker](https://www.scala-sbt.org/sbt-native-packager/formats/docker.html)
 * [Prometheus](https://prometheus.io)
-* [Kubernetes](https://kubernetes.io)
 * [CircleCI](https://circleci.com)
+* [Kubernetes](https://kubernetes.io)
 <!-- [ECR](https://aws.amazon.com/ecr) -->
 
 Plugins
