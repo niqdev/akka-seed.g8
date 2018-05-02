@@ -22,6 +22,7 @@ Features
 * [Prometheus](https://prometheus.io)
 * [CircleCI](https://circleci.com)
 <!-- [ECR](https://aws.amazon.com/ecr) -->
+* [Kubernetes](https://kubernetes.io)
 
 Plugins
 

@@ -125,6 +125,65 @@ LOG_LEVEL=INFO \
   java -jar app/target/scala-2.12/app-latest.jar
 ```
 
+## Local deployment
+
+Requirements
+
+* [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube)
+
+Setup
+```
+# verify installation
+minikube version
+
+# start local cluster
+minikube start --vm-driver=virtualbox
+
+# dashboard
+export NO_PROXY=localhost,127.0.0.1,$(minikube ip)
+minikube dashboard
+
+# reuse the minikube's built-in docker daemon
+eval $(minikube docker-env)
+
+# build image
+sbt docker:publishLocal
+
+# tag (no latest)
+docker tag $name;format="normalize"$ $name;format="organization"$/$name;format="normalize"$:v1.0.0
+
+# namespace
+kubectl create namespace $name;format="organization"$
+kubectl config set-context $(kubectl config current-context) --namespace=$name;format="organization"$
+kubectl get namespaces
+```
+
+Simple deployment
+```
+# deploy
+kubectl run $name;format="normalize"$ \
+  --image=$name;format="organization"$/$name;format="normalize"$:v1.0.0 \
+  --port=3000
+
+# expose port
+kubectl expose deployment $name;format="normalize"$ \
+  --type=NodePort \
+  --port=3000
+
+# verify service
+NODE_PORT=$(kubectl get services/$name;format="normalize"$ -o go-template='{{(index .spec.ports 0).nodePort}}')
+http $(minikube ip):$NODE_PORT/status
+
+# info
+kubectl get pod
+kubectl get deployment
+kubectl get service
+kubectl describe services/$name;format="normalize"$
+
+# cleanup
+kubectl delete service,deployment $name;format="normalize"$
+```
+
 ## APIs
 
 ```bash
