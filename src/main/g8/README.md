@@ -140,11 +140,11 @@ minikube version
 minikube start --vm-driver=virtualbox
 
 # dashboard
-export NO_PROXY=localhost,127.0.0.1,$(minikube ip)
+export NO_PROXY=localhost,127.0.0.1,\$(minikube ip)
 minikube dashboard
 
 # reuse minikube's built-in docker daemon
-eval $(minikube docker-env)
+eval \$(minikube docker-env)
 
 # build image
 sbt docker:publishLocal
@@ -157,7 +157,7 @@ Simple deployment
 ```
 # namespace
 kubectl create namespace $organization;format="normalize"$
-kubectl config set-context $(kubectl config current-context) --namespace=$organization;format="normalize"$
+kubectl config set-context \$(kubectl config current-context) --namespace=$organization;format="normalize"$
 kubectl get namespaces
 
 # create pod and deployment
@@ -179,9 +179,9 @@ kubectl create -f local-deployment.yaml
 Useful command
 ```
 # verify load balancer
-NODE_PORT=$(kubectl get services/$name;format="normalize"$ -o go-template='{{(index .spec.ports 0).nodePort}}')
-http $(minikube ip):$NODE_PORT/status
-http $(minikube ip):$NODE_PORT/env | jq ".MY_POD_IP"
+NODE_PORT=\$(kubectl get services/$name;format="normalize"$ -o go-template='{{(index .spec.ports 0).nodePort}}')
+http \$(minikube ip):$NODE_PORT/status
+http \$(minikube ip):$NODE_PORT/env | jq ".MY_POD_IP"
 
 # logs
 kubectl logs -f $name;format="normalize"$
