@@ -186,14 +186,15 @@ kubectl delete service,deployment $name;format="normalize"$
 
 ## APIs
 
-```bash
+```
 # status
 http :3000/status
-curl localhost:3000/status
 
 # metrics
 http :3000/metrics
-curl localhost:3000/metrics
+
+# env
+http :3000/env
 ```
 
 ## Monitor

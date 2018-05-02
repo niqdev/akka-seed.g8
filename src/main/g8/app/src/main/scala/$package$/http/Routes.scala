@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.StatusCodes.ServiceUnavailable
 import akka.http.scaladsl.server.Directives.pathPrefix
 import akka.http.scaladsl.server.Route
 import akka.util.Timeout
-import $package$.http.route.{MetricsRoute, StatusRoute}
+import $package$.http.route.{EnvRoute, MetricsRoute, StatusRoute}
 
 import scala.concurrent.ExecutionContext
 
@@ -13,7 +13,7 @@ import scala.concurrent.ExecutionContext
 import akka.http.scaladsl.server.Directives._
 // scalastyle:on underscore.import
 
-trait Routes extends StatusRoute with MetricsRoute {
+trait Routes extends StatusRoute with MetricsRoute with EnvRoute {
 
   protected[this] implicit def executionContext: ExecutionContext
   protected[this] implicit def timeout: Timeout
@@ -23,7 +23,7 @@ trait Routes extends StatusRoute with MetricsRoute {
     *
     * @return Route
     */
-  def routes: Route = statusRoute ~ metricsRoute ~ v1
+  def routes: Route = statusRoute ~ metricsRoute ~ envRoute ~ v1
 
   private[this] def v1 =
     pathPrefix("v1") {
