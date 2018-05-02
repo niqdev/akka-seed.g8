@@ -1,5 +1,18 @@
 # $name;format="normalize"$
 
+## APIs
+
+```bash
+# status
+http :3000/status
+
+# metrics
+http :3000/metrics
+
+# env
+http :3000/env
+```
+
 ## Development
 
 ```bash
@@ -132,7 +145,7 @@ Requirements
 * [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube)
 
 Setup
-```
+```bash
 # verify installation
 minikube version
 
@@ -154,7 +167,7 @@ docker tag $name;format="normalize"$ $organization;format="normalize"$/$name;for
 ```
 
 Simple deployment
-```
+```bash
 # namespace
 kubectl create namespace $organization;format="normalize"$
 kubectl config set-context \$(kubectl config current-context) --namespace=$organization;format="normalize"$
@@ -172,12 +185,12 @@ kubectl expose deployment $name;format="normalize"$ \
 ```
 
 Service
-```
+```bash
 kubectl create -f local-deployment.yaml
 ```
 
 Useful command
-```
+```bash
 # verify load balancer
 NODE_PORT=\$(kubectl get services/$name;format="normalize"$ -o go-template='{{(index .spec.ports 0).nodePort}}')
 http \$(minikube ip):\$NODE_PORT/status
@@ -206,19 +219,6 @@ kubectl delete deployment $name;format="normalize"$-deployment
 kubectl delete namespace $organization;format="normalize"$
 kubectl delete pv local-pv-volume
 kubectl delete pvc local-pv-claim
-```
-
-## APIs
-
-```
-# status
-http :3000/status
-
-# metrics
-http :3000/metrics
-
-# env
-http :3000/env
 ```
 
 ## Monitor
