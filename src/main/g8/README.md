@@ -143,7 +143,7 @@ minikube start --vm-driver=virtualbox
 export NO_PROXY=localhost,127.0.0.1,$(minikube ip)
 minikube dashboard
 
-# reuse the minikube's built-in docker daemon
+# reuse minikube's built-in docker daemon
 eval $(minikube docker-env)
 
 # build image
@@ -194,7 +194,7 @@ kubectl exec -it $name;format="normalize"$ -- /bin/bash
 kubectl scale --replicas=10 deployment/$name;format="normalize"$-deployment
 
 # info
-kubectl get pod,deployment,service,namespace
+kubectl get pod,deployment,service,namespace,pv,pvc
 kubectl get pod --output=yaml
 kubectl get pod --watch
 kubectl describe pod
@@ -204,6 +204,8 @@ kubectl describe services/$name;format="normalize"$
 kubectl delete service $name;format="normalize"$
 kubectl delete deployment $name;format="normalize"$-deployment
 kubectl delete namespace $organization;format="normalize"$
+kubectl delete pv local-pv-volume
+kubectl delete pvc local-pv-claim
 ```
 
 ## APIs

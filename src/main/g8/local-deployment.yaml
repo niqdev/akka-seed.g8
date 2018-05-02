@@ -21,6 +21,37 @@ spec:
   type: LoadBalancer
 ---
 
+# volume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/vol/data"
+---
+
+# volume request
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+
 # deployment
 apiVersion: apps/v1
 kind: Deployment
@@ -42,6 +73,10 @@ spec:
       labels:
         app: $name;format="normalize"$-app
     spec:
+      #volumes:
+      #  - name: local-pv-storage
+      #    persistentVolumeClaim:
+      #     claimName: local-pv-claim
       containers:
         - name: $name;format="normalize"$-pod
           image: $organization;format="normalize"$/$name;format="normalize"$:v1.0.0
@@ -54,3 +89,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+          # TODO permissions https://github.com/kubernetes/kubernetes/issues/2630
+          #volumeMounts:
+          #  - mountPath: "/opt/docker/log"
+          #    name: local-pv-storage
