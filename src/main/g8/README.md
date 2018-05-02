@@ -150,38 +150,60 @@ eval $(minikube docker-env)
 sbt docker:publishLocal
 
 # tag (no latest)
-docker tag $name;format="normalize"$ $name;format="organization"$/$name;format="normalize"$:v1.0.0
-
-# namespace
-kubectl create namespace $name;format="organization"$
-kubectl config set-context $(kubectl config current-context) --namespace=$name;format="organization"$
-kubectl get namespaces
+docker tag $name;format="normalize"$ $organization;format="normalize"$/$name;format="normalize"$:v1.0.0
 ```
 
 Simple deployment
 ```
-# deploy
+# namespace
+kubectl create namespace $organization;format="normalize"$
+kubectl config set-context $(kubectl config current-context) --namespace=$organization;format="normalize"$
+kubectl get namespaces
+
+# create pod and deployment
 kubectl run $name;format="normalize"$ \
-  --image=$name;format="organization"$/$name;format="normalize"$:v1.0.0 \
+  --image=$organization;format="normalize"$/$name;format="normalize"$:v1.0.0 \
   --port=3000
 
-# expose port
+# expose service
 kubectl expose deployment $name;format="normalize"$ \
   --type=NodePort \
   --port=3000
+```
 
-# verify service
+Service
+```
+kubectl create -f local-deployment.yaml
+```
+
+Useful command
+```
+# verify load balancer
 NODE_PORT=$(kubectl get services/$name;format="normalize"$ -o go-template='{{(index .spec.ports 0).nodePort}}')
 http $(minikube ip):$NODE_PORT/status
+http $(minikube ip):$NODE_PORT/env | jq ".MY_POD_IP"
+
+# logs
+kubectl logs -f $name;format="normalize"$
+
+# access pod
+kubectl exec -it $name;format="normalize"$ bash
+kubectl exec -it $name;format="normalize"$ -- /bin/bash
+
+# scale
+kubectl scale --replicas=10 deployment/$name;format="normalize"$-deployment
 
 # info
-kubectl get pod
-kubectl get deployment
-kubectl get service
+kubectl get pod,deployment,service,namespace
+kubectl get pod --output=yaml
+kubectl get pod --watch
+kubectl describe pod
 kubectl describe services/$name;format="normalize"$
 
 # cleanup
-kubectl delete service,deployment $name;format="normalize"$
+kubectl delete service $name;format="normalize"$
+kubectl delete deployment $name;format="normalize"$-deployment
+kubectl delete namespace $organization;format="normalize"$
 ```
 
 ## APIs

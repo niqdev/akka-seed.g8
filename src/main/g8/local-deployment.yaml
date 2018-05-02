@@ -1,0 +1,56 @@
+# namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: $organization;format="normalize"$
+---
+
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  name: $name;format="normalize"$
+  namespace: $organization;format="normalize"$
+spec:
+  selector:
+    app: $name;format="normalize"$-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 8080
+  type: LoadBalancer
+---
+
+# deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $name;format="normalize"$-deployment
+  namespace: $organization;format="normalize"$
+  labels:
+    app: $name;format="normalize"$
+spec:
+  replicas: 3
+  # how the Deployment finds which Pods to manage
+  selector:
+    matchLabels:
+      app: $name;format="normalize"$-app
+  # Pod's template
+  template:
+    metadata:
+      name: $name;format="normalize"$
+      labels:
+        app: $name;format="normalize"$-app
+    spec:
+      containers:
+        - name: $name;format="normalize"$-pod
+          image: $organization;format="normalize"$/$name;format="normalize"$:v1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: HTTP_PORT
+              value: "8080"
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
