@@ -19,8 +19,7 @@ object Settings {
     scalaVersion := V.scala,
 
     scalacOptions ++= Seq(
-      "-encoding",
-      "UTF-8",
+      "-encoding", "UTF-8",
       "-target:jvm-1.8",
       "-unchecked",
       "-deprecation",

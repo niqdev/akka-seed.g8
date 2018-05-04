@@ -20,6 +20,9 @@ http :3000/env
 sbt app/run
 sbt "cli/run -p MyName --game Rock -a 2"
 
+# console (remove -Xfatal-warnings)
+sbt app/console
+
 # hot reload
 sbt ~reStart
 
