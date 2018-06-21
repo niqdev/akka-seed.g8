@@ -13,3 +13,5 @@ https://medium.com/@notxcain/exposing-jmx-mbeans-and-dropwizard-metrics-in-prome
 https://www.journaldev.com/1352/what-is-jmx-mbean-jconsole-tutorial
 https://tersesystems.com/blog/2014/08/19/exposing-akka-actor-state-with-jmx
 https://github.com/Workday/prometheus-akka
+
+https://sachabarbs.wordpress.com/akka-series
