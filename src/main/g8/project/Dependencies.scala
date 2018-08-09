@@ -16,15 +16,16 @@ object Dependencies {
     val config = "1.3.3"
     val scopt = "3.7.0"
 
-    val akka = "2.5.12"
-    val akkaHttp = "10.1.1"
+    val akka = "2.5.14"
+    val akkaHttp = "10.1.3"
 
     val circe = "0.9.3"
 
-    val prometheus = "0.3.0"
+    val prometheus = "0.5.0"
 
     val scalatest = "3.0.5"
-    val scalamock = "3.6.0"
+    val scalamock = "4.1.0"
+    val gatling = "2.3.1"
   }
 
   lazy val commonDependencies = Seq(
@@ -60,8 +61,8 @@ object Dependencies {
   )
 
   lazy val perfDependencies = commonDependencies ++ Seq(
-    "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.3.1" % "test,it",
-    "io.gatling" % "gatling-test-framework" % "2.3.1" % "test,it"
+    "io.gatling.highcharts" % "gatling-charts-highcharts" % V.gatling % "test,it",
+    "io.gatling" % "gatling-test-framework" % V.gatling % "test,it"
   )
 
 }
