@@ -24,7 +24,7 @@ object Dependencies {
     val prometheus = "0.5.0"
 
     val scalatest = "3.0.5"
-    val scalamock = "4.1.0"
+    val scalamock = "3.6.0"
     val gatling = "2.3.1"
   }
 
