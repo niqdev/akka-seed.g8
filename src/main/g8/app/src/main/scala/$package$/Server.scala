@@ -12,7 +12,8 @@ import scala.concurrent.ExecutionContext
 
 object Server extends Web with App {
 
-  protected[this] implicit val actorSystem: ActorSystem = ActorSystem("$name;format="normalize"$")
+  // must be declared lazy to be used by Route traits
+  protected[this] implicit lazy val actorSystem: ActorSystem = ActorSystem("$name;format="normalize"$")
   protected[this] implicit val materializer: ActorMaterializer = ActorMaterializer()
   protected[this] implicit val executionContext: ExecutionContext = actorSystem.dispatcher
 
